@@ -7,11 +7,6 @@ $dbname = "to-do";
 $dsn = "mysql:host=$host;dbname=$dbname";
 $pdo = new PDO($dsn, $username, $password);
 
-//if($pdo){
-//    echo "You are connected";
-//}else{
-//    echo "Sorry , You are not connected";
-//}
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +55,7 @@ $pdo = new PDO($dsn, $username, $password);
             if (isset($_GET["id"])) {
                 $id=$_GET["id"];
                 $tbname = "data";
-                $query1 = "SELECT * FROM $tbname WHERE id='$id'"; //fetching tasks from database
+                $query1 = "SELECT * FROM $tbname WHERE id='$id'"; //fetching tasks from database to update the task
                 $stmt = $pdo->query($query1);
                 $value = $stmt->fetch();
                 $task1 = $value["value"];
@@ -73,12 +68,12 @@ $pdo = new PDO($dsn, $username, $password);
              if(isset($_GET["update"])){
                 $up_task=$_GET["update_task"];
                 $id=$_GET["id"];
-                $query="UPDATE $tbname SET date=now(), value='$up_task' WHERE id='$id'";
+                $query="UPDATE $tbname SET date=now(), value='$up_task' WHERE id='$id'";//UPDATING the task 
                 $stmt=$pdo->prepare($query);
                 $execute=$stmt->execute();
                 if($execute){
                     //echo "<script> alert('task is updated')</script>";
-                    header("location:index.php");
+                    header("location:index.php");//after updating redirecting to the main page
                 }
             }
             }else{
@@ -96,7 +91,7 @@ $pdo = new PDO($dsn, $username, $password);
             $tbname = "data";
             if (isset($_POST["add"])) {
                 $task = $_POST["new_task"];
-                $query = "INSERT INTO $tbname (date,value) VALUES(now(),'$task')"; //inserting new data into the data base
+                $query = "INSERT INTO $tbname (date,value) VALUES(now(),'$task')"; //inserting new data into the data base.now() function returns the current time and date
                 $stmt = $pdo->prepare($query);
                 $execute = $stmt->execute();
                 if ($execute) {
