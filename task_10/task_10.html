@@ -30,13 +30,13 @@
 <script>
     $("#para").keyup(function(hello) {
         let para = $(this).val();
-        function countWords(str) {//function to count the words
+        function count_Word(str) {//function to count the words
          str = str.replace(/(^\s*)|(\s*$)/gi,"");
          str = str.replace(/[ ]{2,}/gi," ");
          str = str.replace(/\n /,"\n");
          return str.split(' ').length;
       }
-      $("#word").text(countWords(para));
+      $("#word").text(count_Word(para));
         if (hello.keyCode == 32){//escaping the space 
         }else{
         let string = para.split('');
